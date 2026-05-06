@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jet Detail</title>
+</head>
+<body>
+<h2 th:text="${jet.model}"></h2>
+<img th:src="${jet.photoUrl}" width="300"/><br/>
+Capacity:    <span th:text="${jet.capacity}"></span><br/>
+Price/hour:  <span th:text="${jet.pricePerHour}"></span>$<br/>
+Status:      <span th:text="${jet.status}"></span><br/>
+<a th:href="@{/bookings/new(jetId=${jet.id})}">Book this jet</a>
+</body>
+</html>

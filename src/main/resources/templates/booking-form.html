@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Jet</title>
+</head>
+<body>
+<h2>Book a Jet</h2>
+<form th:action="@{/bookings}" method="post">
+    <input type="hidden" name="jetId" th:value="${jetId}"/>
+
+    <label>Departure airport:</label>
+    <select name="fromAirportId">
+        <option th:each="a : ${airports}"
+                th:value="${a.id}"
+                th:text="${a.name} + ' (' + ${a.code} + ')'"></option>
+    </select><br/>
+
+    <label>Arrival airport:</label>
+    <select name="toAirportId">
+        <option th:each="a : ${airports}"
+                th:value="${a.id}"
+                th:text="${a.name} + ' (' + ${a.code} + ')'"></option>
+    </select><br/>
+
+    <label>Departure date:</label>
+    <input type="datetime-local" name="departureDate" required/><br/>
+
+    <button type="submit">Confirm booking</button>
+</form>
+</body>
+</html>

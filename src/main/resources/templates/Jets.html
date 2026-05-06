@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jets</title>
+</head>
+<body>
+<h2>Available Jets</h2>
+<div th:each="jet : ${jets}">
+    <img th:src="${jet.photoUrl}" width="200"/><br/>
+    <b th:text="${jet.model}"></b><br/>
+    Capacity: <span th:text="${jet.capacity}"></span><br/>
+    Price/hour: <span th:text="${jet.pricePerHour}"></span>$<br/>
+    <a th:href="@{/jets/{id}(id=${jet.id})}">View details</a>
+    <hr/>
+</div>
+</body>
+</html>
