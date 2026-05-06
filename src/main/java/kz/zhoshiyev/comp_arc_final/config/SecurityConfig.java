@@ -1,5 +1,6 @@
 package kz.zhoshiyev.comp_arc_final.config;
 
+
 import kz.zhoshiyev.comp_arc_final.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

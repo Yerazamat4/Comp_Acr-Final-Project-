@@ -10,6 +10,7 @@ import lombok.*;
 @Entity
 @Table(name="airports")
 public class Airport {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
