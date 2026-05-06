@@ -21,10 +21,10 @@ public class Booking {
     private Long id;
     @ManyToOne
     @JoinColumn(name="user_id")
-    private User user_id;
+    private User user;
     @ManyToOne
     @JoinColumn(name="jet_id")
-    private Jet jet_id;
+    private Jet jet;
     @Column(name = "departure_date")
     private LocalDateTime departure_date;
     private String route;

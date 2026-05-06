@@ -40,8 +40,8 @@ public class BookingService {
         jetRepository.save(jet);
 
 Booking booking = new Booking();
-        booking.setUser_id(user);
-        booking.setJet_id(jet);
+        booking.setUser(user);
+        booking.setJet(jet);
         booking.setDeparture_date(LocalDateTime.from(LocalDate.from(request.getDepartureDate())));
         booking.setFromAirport(request.getFromAirportId());
         jet.setPrice_per_hour(booking.getTotal_price());
@@ -56,7 +56,7 @@ Booking booking = new Booking();
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
 
         // возвращаем джету статус
-        Jet jet = booking.getJet_id();
+        Jet jet = booking.getJet();
         jet.setStatus("AVAILABLE");
         jetRepository.save(jet);
 
@@ -66,6 +66,6 @@ Booking booking = new Booking();
     }
 
     public List<Booking> getByUser(String email) {
-        return bookingRepository.findByUserEmail(email);
+        return bookingRepository.findByUserEmail(email); // ← исправь здесь
     }
 }
