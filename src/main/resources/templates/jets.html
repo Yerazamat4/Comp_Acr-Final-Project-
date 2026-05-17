@@ -7,7 +7,7 @@
 <body>
 <h2>Available Jets</h2>
 <div th:each="jet : ${jets}">
-    <img th:src="${jet.photoUrl}" width="200"/><br/>
+    <img th:src="${jet.photoUrl}" width="400" height="300"/><br/>
     <b th:text="${jet.model}"></b><br/>
     Capacity: <span th:text="${jet.capacity}"></span><br/>
     Price/hour: <span th:text="${jet.pricePerHour}"></span>$<br/>

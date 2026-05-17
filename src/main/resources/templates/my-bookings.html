@@ -7,10 +7,11 @@
 <body>
 <h2>My Bookings</h2>
 <div th:each="booking : ${bookings}">
-    Jet:    <span th:text="${booking.jet.model}"></span><br/>
-    Date:   <span th:text="${booking.departureDate}"></span><br/>
-    Route:  <span th:text="${booking.route}"></span><br/>
-    Price:  <span th:text="${booking.totalPrice}"></span>$<br/>
+    Jet: <span th:text="${booking.jet.model}"></span><br/>
+    Date: <span th:text="${booking.departure_date}"></span><br/>
+    From: <span th:text="${booking.fromAirport.name}"></span><br/>
+    To: <span th:text="${booking.toAirport.name}"></span><br/>
+    Price: <span th:text="${booking.total_price}"></span>$<br/>
     Status: <span th:text="${booking.status}"></span><br/>
 
     <form th:if="${booking.status == 'CONFIRMED'}"

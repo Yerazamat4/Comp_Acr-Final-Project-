@@ -37,6 +37,5 @@ public class Booking {
     @JoinColumn(name = "to_airport_id")
     private Airport toAirport;
 
-    public void setFromAirport(Long fromAirportId) {
-    }
+
 }

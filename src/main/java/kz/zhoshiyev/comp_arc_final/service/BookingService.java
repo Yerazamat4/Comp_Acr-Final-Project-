@@ -1,6 +1,7 @@
 package kz.zhoshiyev.comp_arc_final.service;
 
 import kz.zhoshiyev.comp_arc_final.dto.BookingRequest;
+import kz.zhoshiyev.comp_arc_final.entities.Airport;
 import kz.zhoshiyev.comp_arc_final.entities.Booking;
 import kz.zhoshiyev.comp_arc_final.entities.Jet;
 import kz.zhoshiyev.comp_arc_final.entities.User;
@@ -27,24 +28,29 @@ public class BookingService {
 
     public void createBooking(BookingRequest request, String email) {
 
-        // находим пользователя по email
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // находим джет
         Jet jet = jetRepository.findById(request.getJetId())
                 .orElseThrow(() -> new RuntimeException("Jet not found"));
 
-        // меняем статус джета
+        Airport fromAirport = airportRepository.findById(request.getFromAirportId())
+                .orElseThrow(() -> new RuntimeException("Airport not found"));
+
+        Airport toAirport = airportRepository.findById(request.getToAirportId())
+                .orElseThrow(() -> new RuntimeException("Airport not found"));
+
+
         jet.setStatus("UNAVAILABLE");
         jetRepository.save(jet);
 
 Booking booking = new Booking();
         booking.setUser(user);
         booking.setJet(jet);
-        booking.setDeparture_date(LocalDateTime.from(LocalDate.from(request.getDepartureDate())));
-        booking.setFromAirport(request.getFromAirportId());
-        jet.setPrice_per_hour(booking.getTotal_price());
+        booking.setDeparture_date(request.getDepartureDate());
+        booking.setFromAirport(fromAirport);;
+        booking.setToAirport(toAirport);
+        booking.setTotal_price(jet.getPricePerHour());
         booking.setStatus("CONFIRMED");
 
         bookingRepository.save(booking);
@@ -55,17 +61,16 @@ Booking booking = new Booking();
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
 
-        // возвращаем джету статус
+
         Jet jet = booking.getJet();
         jet.setStatus("AVAILABLE");
         jetRepository.save(jet);
 
-        // отменяем бронь
+
         booking.setStatus("CANCELLED");
         bookingRepository.save(booking);
     }
-
     public List<Booking> getByUser(String email) {
-        return bookingRepository.findByUserEmail(email); // ← исправь здесь
+        return bookingRepository.findByUserEmail(email);
     }
 }

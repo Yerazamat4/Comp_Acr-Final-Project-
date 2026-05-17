@@ -17,11 +17,11 @@ public class Jet {
     private Long id;
     private String model;
     private Long capacity;
-    private Double price_per_hour;
+    @Column(name = "price_per_hour")
+    private Double pricePerHour;
     private String status;
-    private String photo_url;
+    @Column(name = "photo_url")
+    private String photoUrl;
 
-    public BigDecimal getPricePerHour() {
-        return null;
-    }
+
 }
