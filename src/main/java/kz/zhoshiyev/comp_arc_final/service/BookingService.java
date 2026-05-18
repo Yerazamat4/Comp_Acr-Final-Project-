@@ -6,7 +6,6 @@ import kz.zhoshiyev.comp_arc_final.entities.Booking;
 import kz.zhoshiyev.comp_arc_final.entities.Jet;
 import kz.zhoshiyev.comp_arc_final.entities.User;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 import kz.zhoshiyev.comp_arc_final.repository.AirportRepository;
 import kz.zhoshiyev.comp_arc_final.repository.BookingRepository;
@@ -40,7 +39,6 @@ public class BookingService {
         Airport toAirport = airportRepository.findById(request.getToAirportId())
                 .orElseThrow(() -> new RuntimeException("Airport not found"));
 
-
         jet.setStatus("UNAVAILABLE");
         jetRepository.save(jet);
 
@@ -52,6 +50,14 @@ Booking booking = new Booking();
         booking.setToAirport(toAirport);
         booking.setTotal_price(jet.getPricePerHour());
         booking.setStatus("CONFIRMED");
+
+        double totalPrice = FlightCalculator.totalPrice(
+                fromAirport.getLat(), fromAirport.getLon(),
+                toAirport.getLat(),   toAirport.getLon(),
+                jet.getPricePerHour()
+        );
+
+        booking.setTotal_price(totalPrice);
 
         bookingRepository.save(booking);
     }

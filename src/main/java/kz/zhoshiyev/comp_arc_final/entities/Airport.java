@@ -19,4 +19,6 @@ public class Airport {
     private String code;
     private  String city;
     private String country;
+    private Double lat;
+    private Double lon;
 }
