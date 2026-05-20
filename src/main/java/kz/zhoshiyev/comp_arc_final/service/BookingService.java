@@ -26,6 +26,9 @@ public class BookingService {
     private final AirportRepository airportRepository;
 
     public void createBooking(BookingRequest request, String email) {
+        if (request.getFromAirportId().equals(request.getToAirportId())) {
+            throw new IllegalArgumentException("Аэропорт вылета и назначения не могут совпадать");
+        }
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
