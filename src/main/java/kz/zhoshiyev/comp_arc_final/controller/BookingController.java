@@ -51,4 +51,11 @@ public class BookingController {
         return "my-bookings";
 
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgument(IllegalArgumentException ex, Model model) {
+        model.addAttribute("error", ex.getMessage());
+        model.addAttribute("jetId", 0L); // чтобы форма не упала
+        model.addAttribute("airports", airportRepository.findAll());
+        return "booking-form"; // возвращаем на форму с ошибкой
+    }
 }
