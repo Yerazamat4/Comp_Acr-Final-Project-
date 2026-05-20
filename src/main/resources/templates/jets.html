@@ -1,18 +1,103 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Jets</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Available Jets</h2>-->
+<!--<div th:each="jet : ${jets}">-->
+<!--    <img th:src="${jet.photoUrl}" width="400" height="300"/><br/>-->
+<!--    <b th:text="${jet.model}"></b><br/>-->
+<!--    Capacity: <span th:text="${jet.capacity}"></span><br/>-->
+<!--    Price/hour: <span th:text="${jet.pricePerHour}"></span>$<br/>-->
+<!--    <a th:href="@{/jets/{id}(id=${jet.id})}">View details</a>-->
+<!--    <hr/>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Jets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background:
+                /*radial-gradient(circle at 20% 30%, #CC0086 11%, transparent 35%),*/
+                /*radial-gradient(circle at 80% 25%, #5BBD02 13%, transparent 36%),*/
+                /*radial-gradient(circle at 60% 75%, #F50000 9%, transparent 32%),*/
+                    linear-gradient(135deg, #74EBDC 0%, #ACB6E5 80%);
+            background-blend-mode: screen;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 0;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 1000px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .jet-card {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .jet-card img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .jet-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #444;
+        }
+        .jet-info b {
+            font-size: 16px;
+            color: #222;
+        }
+        .jet-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #ACB6E5;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .jet-link:hover {
+            background: #74ebd5;
+        }
+    </style>
 </head>
 <body>
-<h2>Available Jets</h2>
-<div th:each="jet : ${jets}">
-    <img th:src="${jet.photoUrl}" width="400" height="300"/><br/>
-    <b th:text="${jet.model}"></b><br/>
-    Capacity: <span th:text="${jet.capacity}"></span><br/>
-    Price/hour: <span th:text="${jet.pricePerHour}"></span>$<br/>
-    <a th:href="@{/jets/{id}(id=${jet.id})}">View details</a>
-    <hr/>
+<div class="container">
+    <h2 style="font-family:Lucida Calligraphy">Available Jets</h2>
+    <div th:each="jet : ${jets}" class="jet-card">
+        <img th:src="${jet.photoUrl}" alt="Jet photo"/>
+        <div class="jet-info">
+            <b  th:text="${jet.model}"></b><br/>
+            Capacity: <span th:text="${jet.capacity}"></span><br/>
+            Price/hour: <span th:text="${jet.pricePerHour}"></span>$
+        </div>
+        <a class="jet-link" th:href="@{/jets/{id}(id=${jet.id})}">View details</a>
+    </div>
+    <a class="link-btn" th:href="@{/home}">Back to Home</a>
 </div>
 </body>
 </html>

@@ -3,23 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>My Bookings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background:
+                    radial-gradient(circle at 18% 48%, #CC0086 11%, transparent 35%),
+                    radial-gradient(circle at 84% 22%, #5BBD02 13%, transparent 36%),
+                    radial-gradient(circle at 74% 82%, #F50000 9%, transparent 32%),
+                    linear-gradient(135deg, #74EBDC 0%, #ACB6E5 80%);
+            background-blend-mode: screen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 450px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .booking {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .booking span {
+            font-weight: bold;
+            color: #444;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: darkred;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: red;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 15px 0;
+        }.link-btn {
+             display: block;
+             width: 100%;
+             padding: 12px;
+             background: #ACB6E5;
+             border-radius: 6px;
+             color: #fff;
+             font-size: 16px;
+             text-align: center;
+             text-decoration: none;
+             margin-top: 15px;
+             transition: background 0.3s ease;
+         }
+        .link-btn:hover {
+            background: #74ebd5;
+        }
+    </style>
 </head>
 <body>
-<h2>My Bookings</h2>
-<div th:each="booking : ${bookings}">
-    Jet: <span th:text="${booking.jet.model}"></span><br/>
-    Date: <span th:text="${booking.departure_date}"></span><br/>
-    From: <span th:text="${booking.fromAirport.name}"></span><br/>
-    To: <span th:text="${booking.toAirport.name}"></span><br/>
-    Price: <span th:text="${booking.total_price}"></span>$<br/>
-    Status: <span th:text="${booking.status}"></span><br/>
+<div class="container">
+    <h2>My Bookings</h2>
+    <div th:each="booking : ${bookings}" class="booking">
+        Jet: <span th:text="${booking.jet.model}"></span><br/>
+        Date: <span th:text="${booking.departure_date}"></span><br/>
+        From: <span th:text="${booking.fromAirport.name}"></span><br/>
+        To: <span th:text="${booking.toAirport.name}"></span><br/>
+        Price: <span th:text="${booking.total_price}"></span>$<br/>
+        Status: <span th:text="${booking.status}"></span><br/>
 
-    <form th:if="${booking.status == 'CONFIRMED'}"
-          th:action="@{/bookings/{id}/cancel(id=${booking.id})}"
-          method="post">
-        <button type="submit">Cancel</button>
-    </form>
-    <hr/>
+        <form th:if="${booking.status == 'CONFIRMED'}"
+              th:action="@{/bookings/{id}/cancel(id=${booking.id})}"
+              method="post">
+            <button type="submit">Cancel</button>
+        </form>
+    </div>
+
+    <a class="link-btn" th:href="@{/jets}">Back to Jets</a>
+    <a class="link-btn" th:href="@{/home}">Back to Home</a>
 </div>
 </body>
 </html>

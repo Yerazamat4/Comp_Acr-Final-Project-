@@ -1,5 +1,7 @@
 package kz.zhoshiyev.comp_arc_final.controller;
 
+import kz.zhoshiyev.comp_arc_final.entities.Jet;
+import kz.zhoshiyev.comp_arc_final.repository.JetRepository;
 import org.springframework.ui.Model;
 import kz.zhoshiyev.comp_arc_final.dto.BookingRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +19,15 @@ public class BookingController {
 
     private final BookingService bookingService;
     private final AirportRepository airportRepository;
+    private final JetRepository jetRepository;
 
     @GetMapping("/bookings/new")
     public String bookingForm(@RequestParam Long jetId, Model model) {
-        model.addAttribute("jetId", jetId);
+        Jet jet = jetRepository.findJetById(jetId);
+        if (jet == null) {
+            throw new IllegalArgumentException("Invalid jet ID: " + jetId);
+        }
+        model.addAttribute("jet", jet);
         model.addAttribute("airports", airportRepository.findAll());
         return "booking-form";
     }
@@ -42,5 +49,6 @@ public class BookingController {
     public String myBookings(Model model, Principal principal) {
         model.addAttribute("bookings", bookingService.getByUser(principal.getName()));
         return "my-bookings";
+
     }
 }

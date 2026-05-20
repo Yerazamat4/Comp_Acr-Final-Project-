@@ -1,15 +1,203 @@
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Jet Detail</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background:-->
+<!--                    /*radial-gradient(circle at 20% 30%, #CC0086 11%, transparent 35%),*/-->
+<!--                    /*radial-gradient(circle at 80% 25%, #5BBD02 13%, transparent 36%),*/-->
+<!--                    /*radial-gradient(circle at 60% 75%, #F50000 9%, transparent 32%),*/-->
+<!--                    linear-gradient(135deg, #74EBDC 0%, #ACB6E5 80%);-->
+<!--            background-blend-mode: screen;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: flex-start;-->
+<!--            min-height: 100vh;-->
+<!--            margin: 0;-->
+<!--            padding: 40px 0;-->
+<!--        }-->
+<!--        .container {-->
+<!--            background: #fff;-->
+<!--            padding: 30px;-->
+<!--            border-radius: 10px;-->
+<!--            box-shadow: 0 8px 16px rgba(0,0,0,0.2);-->
+<!--            width: 500px;-->
+<!--        }-->
+<!--        h2 {-->
+<!--            text-align: center;-->
+<!--            margin-bottom: 20px;-->
+<!--            color: #333;-->
+<!--        }-->
+<!--        img {-->
+<!--            display: block;-->
+<!--            margin: 0 auto 5px auto;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 8px rgba(0,0,0,0.1);-->
+<!--        }-->
+<!--        .info {-->
+<!--            font-size: 14px;-->
+<!--            color: #444;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+<!--        .status {-->
+<!--            text-align: center;-->
+<!--            font-weight: bold;-->
+<!--            padding: 10px;-->
+<!--            border-radius: 6px;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--        .status.available {-->
+<!--            background: #d4edda;-->
+<!--            color: #155724;-->
+<!--        }-->
+<!--        .status.unavailable {-->
+<!--            background: #f8d7da;-->
+<!--            color: #721c24;-->
+<!--        }-->
+<!--        .btn {-->
+<!--            display: block;-->
+<!--            text-align: center;-->
+<!--            padding: 12px;-->
+<!--            background: #ACB6E5;-->
+<!--            color: #fff;-->
+<!--            border-radius: 6px;-->
+<!--            text-decoration: none;-->
+<!--            transition: background 0.3s ease;-->
+<!--        }-->
+<!--        .btn:hover {-->
+<!--            background: #74ebd5;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h2 th:text="${jet.model}"></h2>-->
+<!--    <img th:src="${jet.photoUrl}" width="300" alt="Jet photo"/>-->
+<!--    <div class="info">-->
+<!--        Capacity: <span th:text="${jet.capacity}"></span><br/>-->
+<!--        Price/hour: <span style =color:darkgreen th:text="${jet.pricePerHour}"></span>$-->
+<!--    </div>-->
+
+
+<!--    <div th:if="${jet.status == 'AVAILABLE'}" class="status available">-->
+<!--        AVAILABLE-->
+<!--    </div>-->
+<!--    <div th:if="${jet.status == 'UNAVAILABLE'}" class="status unavailable">-->
+<!--        UNAVAILABLE-->
+<!--    </div>-->
+
+<!--    <a class="btn" th:href="@{/bookings/new(jetId=${jet.id})}">Book this jet</a>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Jet Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            width: 500px;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        img {
+            display: block;
+            margin: 0 auto 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .info {
+            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 15px;
+        }
+
+        .status {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .status.available {
+            background: rgba(212, 237, 218, 0.4);
+            color: #d4edda;
+            border: 1px solid #d4edda;
+        }
+
+        .status.unavailable {
+            background: rgba(248, 215, 218, 0.4);
+            color: #f8d7da;
+            border: 1px solid #f8d7da;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+    </style>
 </head>
-<body>
-<h2 th:text="${jet.model}"></h2>
-<img th:src="${jet.photoUrl}" width="300"/><br/>
-Capacity:    <span th:text="${jet.capacity}"></span><br/>
-Price/hour:  <span th:text="${jet.pricePerHour}"></span>$<br/>
-Status:      <span th:text="${jet.status}"></span><br/>
-<a th:href="@{/bookings/new(jetId=${jet.id})}">Book this jet</a>
+<body th:style="'background-image: url(' + ${jet.photoUrl} + ');'">
+
+<div class="container">
+    <h2 th:text="${jet.model}"></h2>
+    <img th:src="${jet.photoUrl}" width="300" alt="Jet photo"/>
+    <div class="info">
+        Capacity: <span th:text="${jet.capacity}"></span><br/>
+        Price/hour: <span th:text="${jet.pricePerHour}"></span>$
+    </div>
+
+    <div th:if="${jet.status == 'AVAILABLE'}" class="status available">AVAILABLE</div>
+    <div th:if="${jet.status == 'UNAVAILABLE'}" class="status unavailable">UNAVAILABLE</div>
+
+    <a class="btn" th:href="@{/bookings/new(jetId=${jet.id})}">Book this jet</a>
+    <a class="btn" th:href="@{/jets}">Back to Jets</a>
+</div>
+
 </body>
 </html>

@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface JetRepository extends JpaRepository<Jet, Long> {
     List<Jet> findByStatus(String status);
+    Jet findJetById(Long id);
+
 }
